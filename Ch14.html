@@ -1,0 +1,1532 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ch14 典型資料分析案例 &#8212; My sample book</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ch15 NumPy陣列" href="Ch15.html" />
+    <link rel="prev" title="Ch13 數據視覺化" href="Ch13.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">My sample book</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch3.html">
+   Ch03 Pandas資料結構
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch4.html">
+   Ch04 取得資料來源
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch5.html">
+   Ch05 數據預處理
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch6.html">
+   Ch06資料選擇
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch7.html">
+   Ch07 數值操作
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch8.html">
+   Ch08 資料運算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch9.html">
+   Ch09 時間序列
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch10.html">
+   Ch10 資料分組/樞紐分析表
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch11.html">
+   Ch11 多表拼接
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch12.html">
+   Ch12 結果匯出
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch13.html">
+   Ch13 數據視覺化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch13.html#reference">
+   Reference
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Ch14 典型資料分析案例
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch15.html">
+   Ch15 NumPy陣列
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Ch14.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FCh14.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Ch14.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python">
+   利用Python實現報表自動化
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   自動發送電子郵件
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   假如你是某連鎖超市的資料分析師
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   假如你是某銀行的資料分析師
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="ch14">
+<h1>Ch14 典型資料分析案例<a class="headerlink" href="#ch14" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="python">
+<h2>利用Python實現報表自動化<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 匯入來源資料</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\ACD019600\data\order-14.1.csv&quot;</span><span class="p">,</span>
+                   <span class="n">parse_dates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;成交時間&quot;</span><span class="p">])</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>  <span class="c1">#預覽數據</span>
+<span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>  <span class="c1">#查看來源資料類型</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 3744 entries, 0 to 3743
+Data columns (total 7 columns):
+商品ID    3478 non-null float64
+類別ID    3478 non-null float64
+門市編號    3478 non-null object
+單價      3478 non-null float64
+銷量      3478 non-null float64
+成交時間    3478 non-null datetime64[ns]
+訂單ID    3478 non-null object
+dtypes: datetime64[ns](1), float64(4), object(2)
+memory usage: 204.8+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 計算本月相關指標</span>
+<span class="n">This_month</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;成交時間&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">&amp;</span>
+                <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;成交時間&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">28</span><span class="p">))]</span>
+<span class="n">sales_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">This_month</span><span class="p">[</span><span class="s2">&quot;銷量&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">This_month</span><span class="p">[</span><span class="s2">&quot;單價&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="c1">#銷售額計算</span>
+<span class="c1">#客流量計算</span>
+<span class="n">traffic_1</span> <span class="o">=</span> <span class="n">This_month</span><span class="p">[</span><span class="s2">&quot;訂單ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">s_t_1</span> <span class="o">=</span> <span class="n">sales_1</span><span class="o">/</span><span class="n">traffic_1</span><span class="c1">#客單價計算</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;本月銷售額為:</span><span class="si">{:.2f}</span><span class="s2">,客流量為:</span><span class="si">{}</span><span class="s2">, 客單價為:</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sales_1</span><span class="p">,</span><span class="n">traffic_1</span><span class="p">,</span><span class="n">s_t_1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>本月銷售額為:10412.78,客流量為:343, 客單價為:30.36
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 計算上月相關指標</span>
+<span class="n">last_month</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;成交時間&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">&amp;</span>
+                <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;成交時間&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">))]</span>
+<span class="n">sales_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">last_month</span><span class="p">[</span><span class="s2">&quot;銷量&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">last_month</span><span class="p">[</span><span class="s2">&quot;單價&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="c1">#銷售額計算</span>
+
+<span class="c1">#客流量計算</span>
+<span class="n">traffic_2</span> <span class="o">=</span> <span class="n">last_month</span><span class="p">[</span><span class="s2">&quot;訂單ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">s_t_2</span> <span class="o">=</span> <span class="n">sales_2</span><span class="o">/</span><span class="n">traffic_2</span> <span class="c1">#客單價計算</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;本月銷售額為:</span><span class="si">{:.2f}</span><span class="s2">,客流量為:</span><span class="si">{}</span><span class="s2">, 客單價為:</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sales_2</span><span class="p">,</span><span class="n">traffic_2</span><span class="p">,</span><span class="n">s_t_2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>本月銷售額為:9940.97,客流量為:315, 客單價為:31.56
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 計算去年同期相關指標</span>
+<span class="n">same_month</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;成交時間&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">&amp;</span>
+                <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;成交時間&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">28</span><span class="p">))]</span>
+<span class="n">sales_3</span> <span class="o">=</span> <span class="p">(</span><span class="n">same_month</span><span class="p">[</span><span class="s2">&quot;銷量&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">same_month</span><span class="p">[</span><span class="s2">&quot;單價&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="c1">#銷售額計算</span>
+
+<span class="c1">#客流量計算</span>
+<span class="n">traffic_3</span> <span class="o">=</span> <span class="n">same_month</span><span class="p">[</span><span class="s2">&quot;訂單ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">s_t_3</span> <span class="o">=</span> <span class="n">sales_3</span><span class="o">/</span><span class="n">traffic_3</span> <span class="c1">#客單價計算</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;本月銷售額為:</span><span class="si">{:.2f}</span><span class="s2">,客流量為:</span><span class="si">{}</span><span class="s2">, 客單價為:</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sales_3</span><span class="p">,</span><span class="n">traffic_3</span><span class="p">,</span><span class="n">s_t_3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>本月銷售額為:8596.31,客流量為:262, 客單價為:32.81
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 利用函式提高編碼效率</span>
+<span class="k">def</span> <span class="nf">get_month_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">sale</span> <span class="o">=</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;單價&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;銷量&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="n">traffic</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;訂單ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">sale</span> <span class="o">/</span> <span class="n">traffic</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">sale</span><span class="p">,</span><span class="n">traffic</span><span class="p">,</span><span class="n">price</span><span class="p">)</span>
+
+<span class="c1">#計算本月相關指標</span>
+<span class="n">sale_1</span><span class="p">,</span><span class="n">traffic_1</span><span class="p">,</span><span class="n">s_t_1</span> <span class="o">=</span> <span class="n">get_month_data</span><span class="p">(</span><span class="n">This_month</span><span class="p">)</span>
+
+<span class="c1">#計算上月相關指標</span>
+<span class="n">sale_2</span><span class="p">,</span><span class="n">traffic_2</span><span class="p">,</span><span class="n">s_t_2</span> <span class="o">=</span> <span class="n">get_month_data</span><span class="p">(</span><span class="n">last_month</span><span class="p">)</span>
+
+<span class="c1">#計算去年同期相關指標</span>
+<span class="n">sale_3</span><span class="p">,</span><span class="n">traffic_3</span><span class="p">,</span><span class="n">s_t_3</span> <span class="o">=</span> <span class="n">get_month_data</span><span class="p">(</span><span class="n">same_month</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">report</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">sale_1</span><span class="p">,</span><span class="n">sale_2</span><span class="p">,</span><span class="n">sale_3</span><span class="p">],</span> 
+                       <span class="p">[</span><span class="n">traffic_1</span><span class="p">,</span><span class="n">traffic_2</span><span class="p">,</span><span class="n">traffic_3</span><span class="p">],</span> 
+                       <span class="p">[</span><span class="n">s_t_1</span><span class="p">,</span><span class="n">s_t_2</span><span class="p">,</span><span class="n">s_t_3</span><span class="p">]],</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;本月累計&quot;</span><span class="p">,</span><span class="s2">&quot;上月同期&quot;</span><span class="p">,</span><span class="s2">&quot;去年同期&quot;</span><span class="p">],</span> 
+                      <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;銷售額&quot;</span><span class="p">,</span><span class="s2">&quot;客流量&quot;</span><span class="p">,</span><span class="s2">&quot;客單價&quot;</span><span class="p">])</span>
+<span class="n">report</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>本月累計</th>
+      <th>上月同期</th>
+      <th>去年同期</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>銷售額</th>
+      <td>10412.780070</td>
+      <td>9940.972910</td>
+      <td>8596.313470</td>
+    </tr>
+    <tr>
+      <th>客流量</th>
+      <td>343.000000</td>
+      <td>315.000000</td>
+      <td>262.000000</td>
+    </tr>
+    <tr>
+      <th>客單價</th>
+      <td>30.357959</td>
+      <td>31.558644</td>
+      <td>32.810357</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">report</span><span class="p">[</span><span class="s2">&quot;環比&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">report</span><span class="p">[</span><span class="s2">&quot;本月累計&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">report</span><span class="p">[</span><span class="s2">&quot;上月同期&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">report</span><span class="p">[</span><span class="s2">&quot;同比&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">report</span><span class="p">[</span><span class="s2">&quot;本月累計&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">report</span><span class="p">[</span><span class="s2">&quot;去年同期&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">report</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>本月累計</th>
+      <th>上月同期</th>
+      <th>去年同期</th>
+      <th>環比</th>
+      <th>同比</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>銷售額</th>
+      <td>10412.780070</td>
+      <td>9940.972910</td>
+      <td>8596.313470</td>
+      <td>0.047461</td>
+      <td>0.211308</td>
+    </tr>
+    <tr>
+      <th>客流量</th>
+      <td>343.000000</td>
+      <td>315.000000</td>
+      <td>262.000000</td>
+      <td>0.088889</td>
+      <td>0.309160</td>
+    </tr>
+    <tr>
+      <th>客單價</th>
+      <td>30.357959</td>
+      <td>31.558644</td>
+      <td>32.810357</td>
+      <td>-0.038046</td>
+      <td>-0.074745</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">report</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\ACD019600\data\report.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>自動發送電子郵件<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email</span> <span class="kn">import</span> <span class="n">encoders</span>
+<span class="kn">from</span> <span class="nn">email.header</span> <span class="kn">import</span> <span class="n">Header</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="nn">email.utils</span> <span class="kn">import</span> <span class="n">parseaddr</span><span class="p">,</span> <span class="n">formataddr</span>
+<span class="kn">from</span> <span class="nn">email.mime.application</span> <span class="kn">import</span> <span class="n">MIMEApplication</span>
+
+
+<span class="c1">#寄件者email</span>
+<span class="n">asender</span><span class="o">=</span><span class="s2">&quot;thisisdemo543@outlook.com&quot;</span>
+
+<span class="c1">#收件人email</span>
+<span class="n">areceiver</span><span class="o">=</span><span class="s2">&quot;service@gotop.com.tw&quot;</span>
+
+<span class="c1">#副本email</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="s1">&#39;thisisdemo543@outlook.com&#39;</span>
+
+<span class="c1">#郵件主題</span>
+<span class="n">asubject</span> <span class="o">=</span> <span class="s1">&#39;這是一份測試郵件&#39;</span>  
+
+<span class="c1">#寄件者地址</span>
+<span class="n">from_addr</span> <span class="o">=</span> <span class="s2">&quot;thisisdemo543@outlook.com&quot;</span>
+
+<span class="c1">#郵件密碼（）</span>
+<span class="n">password</span><span class="o">=</span><span class="s2">&quot;1234Data&quot;</span>
+
+<span class="c1">#郵件設定</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">()</span>
+<span class="n">msg</span><span class="p">[</span><span class="s1">&#39;Subject&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">asubject</span>  
+<span class="n">msg</span><span class="p">[</span><span class="s1">&#39;to&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">areceiver</span>  
+<span class="n">msg</span><span class="p">[</span><span class="s1">&#39;Cc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">acc</span> 
+<span class="n">msg</span><span class="p">[</span><span class="s1">&#39;from&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;你的名字&quot;</span>
+
+<span class="c1">#郵件正文</span>
+<span class="n">body</span> <span class="o">=</span> <span class="s2">&quot;你好，這是一份測試郵件&quot;</span>
+
+<span class="c1">#添加郵件正文</span>
+<span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;plain&#39;</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+<span class="c1">#添加附件</span>
+<span class="c1">#注意，這裡的檔案路徑是分隔線</span>
+<span class="n">xlsxpart</span> <span class="o">=</span> <span class="n">MIMEApplication</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;C:/ACD019600/data/這是附件.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">xlsxpart</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">,</span> 
+                          <span class="s1">&#39;attachment&#39;</span><span class="p">,</span> 
+                          <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;這是附件.xlsx&#39;</span><span class="p">)</span>
+<span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">xlsxpart</span><span class="p">)</span> 
+
+<span class="c1">#設定郵箱伺服器位址及埠</span>
+<span class="n">smtp_server</span> <span class="o">=</span><span class="s2">&quot;smtp-mail.outlook.com&quot;</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="n">smtp_server</span><span class="p">,</span> <span class="mi">587</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">set_debuglevel</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>
+
+<span class="c1">#登錄郵箱</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">from_addr</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+<span class="c1">#發送郵件</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">from_addr</span><span class="p">,</span> 
+                      <span class="n">areceiver</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="o">+</span><span class="n">acc</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">),</span>
+                      <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+<span class="c1">#斷開伺服器連接</span>
+<span class="n">server</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>假如你是某連鎖超市的資料分析師<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\ACD019600\data\order-14.3.csv&quot;</span><span class="p">,</span><span class="n">parse_dates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;成交時間&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;類別ID&quot;</span><span class="p">)[</span><span class="s2">&quot;銷量&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>類別ID</th>
+      <th>銷量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>910000000</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>910010000</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>910010002</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>910010101</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>910010301</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>910010400</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>910010500</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>910020000</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>910020102</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>910020104</td>
+      <td>31.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>910020105</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>910020202</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>910020204</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>910020207</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>910020208</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>910020300</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>910020302</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>910020403</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>910020404</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>910030000</td>
+      <td>56.0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>910030001</td>
+      <td>65.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>910030002</td>
+      <td>83.0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>910030005</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>910030007</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>910030100</td>
+      <td>13.0</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>910030102</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>910030103</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>910030104</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>910030201</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>910030203</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>338</th>
+      <td>931070003</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>339</th>
+      <td>931070100</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>340</th>
+      <td>931070104</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>341</th>
+      <td>931070106</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>342</th>
+      <td>931080000</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>343</th>
+      <td>931080001</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>344</th>
+      <td>931080003</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>345</th>
+      <td>931080004</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>346</th>
+      <td>931080103</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>347</th>
+      <td>931080104</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>348</th>
+      <td>931080202</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>349</th>
+      <td>931080205</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>350</th>
+      <td>931080401</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>351</th>
+      <td>932010109</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>352</th>
+      <td>932010300</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>353</th>
+      <td>933040501</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>354</th>
+      <td>935010702</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>355</th>
+      <td>935011001</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>356</th>
+      <td>935020101</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>357</th>
+      <td>936000101</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>358</th>
+      <td>936000500</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>359</th>
+      <td>936000501</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>360</th>
+      <td>936010000</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>361</th>
+      <td>936010001</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>362</th>
+      <td>936010002</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>363</th>
+      <td>936030100</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>364</th>
+      <td>936050100</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>365</th>
+      <td>936080103</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>366</th>
+      <td>938030000</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>367</th>
+      <td>960000000</td>
+      <td>121.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>368 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;類別ID&quot;</span><span class="p">)[</span><span class="s2">&quot;銷量&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s2">&quot;銷量&quot;</span><span class="p">,</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>類別ID</th>
+      <th>銷量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>240</th>
+      <td>922000003</td>
+      <td>425.328</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>922000002</td>
+      <td>206.424</td>
+    </tr>
+    <tr>
+      <th>251</th>
+      <td>923000006</td>
+      <td>190.294</td>
+    </tr>
+    <tr>
+      <th>216</th>
+      <td>915030104</td>
+      <td>175.059</td>
+    </tr>
+    <tr>
+      <th>238</th>
+      <td>922000001</td>
+      <td>121.355</td>
+    </tr>
+    <tr>
+      <th>367</th>
+      <td>960000000</td>
+      <td>121.000</td>
+    </tr>
+    <tr>
+      <th>234</th>
+      <td>920090000</td>
+      <td>111.565</td>
+    </tr>
+    <tr>
+      <th>249</th>
+      <td>923000002</td>
+      <td>91.847</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>922000000</td>
+      <td>86.395</td>
+    </tr>
+    <tr>
+      <th>247</th>
+      <td>923000000</td>
+      <td>85.845</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;商品ID&quot;</span><span class="p">,</span><span class="n">values</span> <span class="o">=</span> <span class="s2">&quot;銷量&quot;</span><span class="p">,</span>
+        <span class="n">aggfunc</span> <span class="o">=</span> <span class="s2">&quot;sum&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s2">&quot;銷量&quot;</span><span class="p">,</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>商品ID</th>
+      <th>銷量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8</th>
+      <td>29989059</td>
+      <td>391.549</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>29989072</td>
+      <td>102.876</td>
+    </tr>
+    <tr>
+      <th>469</th>
+      <td>30022232</td>
+      <td>101.000</td>
+    </tr>
+    <tr>
+      <th>523</th>
+      <td>30031960</td>
+      <td>99.998</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>29989157</td>
+      <td>72.453</td>
+    </tr>
+    <tr>
+      <th>476</th>
+      <td>30023041</td>
+      <td>64.416</td>
+    </tr>
+    <tr>
+      <th>505</th>
+      <td>30026255</td>
+      <td>62.375</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>29989058</td>
+      <td>56.052</td>
+    </tr>
+    <tr>
+      <th>510</th>
+      <td>30027007</td>
+      <td>48.757</td>
+    </tr>
+    <tr>
+      <th>903</th>
+      <td>30171264</td>
+      <td>45.000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;銷售額&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;銷量&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;單價&quot;</span><span class="p">]</span>
+<span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;門市編號&quot;</span><span class="p">)[</span><span class="s2">&quot;銷售額&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>門市編號
+CDLG    10908.82612
+CDNL     8059.47867
+CDXL     9981.76166
+Name: 銷售額, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;門市編號&quot;</span><span class="p">)[</span><span class="s2">&quot;銷售額&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;銷售額&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>門市編號
+CDLG    0.376815
+CDNL    0.278392
+CDXL    0.344792
+Name: 銷售額, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#繪製圓形圖</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;font.sans-serif&quot;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;Microsoft JhengHei&#39;</span>
+
+<span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;門市編號&quot;</span><span class="p">)[</span><span class="s2">&quot;銷售額&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;銷售額&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x194d7163630&gt;
+</pre></div>
+</div>
+<img alt="_images/Ch14_19_1.png" src="_images/Ch14_19_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#利用自訂時間格式函式strftime提取小時數</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;小時&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;成交時間&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H&quot;</span><span class="p">)))</span>
+
+<span class="c1">#對小時和訂單刪除重複</span>
+<span class="n">traffic</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s2">&quot;小時&quot;</span><span class="p">,</span><span class="s2">&quot;訂單ID&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="c1">#求每小時的客流量</span>
+<span class="n">traffic</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;小時&quot;</span><span class="p">)[</span><span class="s2">&quot;訂單ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>小時
+6      10
+7      37
+8     106
+9     156
+10    143
+11     63
+13     30
+14     36
+15     17
+16     50
+17     73
+18     71
+19     71
+20     39
+21     16
+Name: 訂單ID, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#繪製每小時客流量折線圖</span>
+<span class="n">traffic</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;小時&quot;</span><span class="p">)[</span><span class="s2">&quot;訂單ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x194d5abac50&gt;
+</pre></div>
+</div>
+<img alt="_images/Ch14_21_1.png" src="_images/Ch14_21_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>假如你是某銀行的資料分析師<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#匯入資料來源</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\ACD019600\data\loan.csv&quot;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 150000 entries, 0 to 149999
+Data columns (total 6 columns):
+用戶ID    150000 non-null int64
+好壞客戶    150000 non-null int64
+年齡      150000 non-null int64
+負債率     150000 non-null float64
+月收入     120269 non-null float64
+眷屬數量    146076 non-null float64
+dtypes: float64(3), int64(3)
+memory usage: 6.9 MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">({</span><span class="s2">&quot;月收入&quot;</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;月收入&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()})</span>
+<span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 150000 entries, 0 to 149999
+Data columns (total 6 columns):
+用戶ID    150000 non-null int64
+好壞客戶    150000 non-null int64
+年齡      150000 non-null int64
+負債率     150000 non-null float64
+月收入     150000 non-null float64
+眷屬數量    146076 non-null float64
+dtypes: float64(3), int64(3)
+memory usage: 6.9 MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cut_bins</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">5000</span><span class="p">,</span><span class="mi">10000</span><span class="p">,</span><span class="mi">15000</span><span class="p">,</span><span class="mi">20000</span><span class="p">,</span><span class="mi">100000</span><span class="p">]</span>
+<span class="n">income_cut</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;月收入&quot;</span><span class="p">],</span><span class="n">cut_bins</span><span class="p">)</span>
+<span class="n">income_cut</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0           (5000.0, 10000.0]
+1               (0.0, 5000.0]
+2               (0.0, 5000.0]
+3               (0.0, 5000.0]
+4         (20000.0, 100000.0]
+5               (0.0, 5000.0]
+6           (5000.0, 10000.0]
+7               (0.0, 5000.0]
+8           (5000.0, 10000.0]
+9         (20000.0, 100000.0]
+10              (0.0, 5000.0]
+11          (5000.0, 10000.0]
+12         (10000.0, 15000.0]
+13         (10000.0, 15000.0]
+14                        NaN
+15         (10000.0, 15000.0]
+16          (5000.0, 10000.0]
+17          (5000.0, 10000.0]
+18              (0.0, 5000.0]
+19              (0.0, 5000.0]
+20         (10000.0, 15000.0]
+21              (0.0, 5000.0]
+22              (0.0, 5000.0]
+23          (5000.0, 10000.0]
+24              (0.0, 5000.0]
+25              (0.0, 5000.0]
+26          (5000.0, 10000.0]
+27              (0.0, 5000.0]
+28              (0.0, 5000.0]
+29          (5000.0, 10000.0]
+                 ...         
+149970     (15000.0, 20000.0]
+149971          (0.0, 5000.0]
+149972      (5000.0, 10000.0]
+149973      (5000.0, 10000.0]
+149974          (0.0, 5000.0]
+149975      (5000.0, 10000.0]
+149976      (5000.0, 10000.0]
+149977      (5000.0, 10000.0]
+149978          (0.0, 5000.0]
+149979      (5000.0, 10000.0]
+149980      (5000.0, 10000.0]
+149981      (5000.0, 10000.0]
+149982          (0.0, 5000.0]
+149983          (0.0, 5000.0]
+149984      (5000.0, 10000.0]
+149985          (0.0, 5000.0]
+149986          (0.0, 5000.0]
+149987          (0.0, 5000.0]
+149988      (5000.0, 10000.0]
+149989      (5000.0, 10000.0]
+149990          (0.0, 5000.0]
+149991     (10000.0, 15000.0]
+149992      (5000.0, 10000.0]
+149993          (0.0, 5000.0]
+149994          (0.0, 5000.0]
+149995          (0.0, 5000.0]
+149996      (5000.0, 10000.0]
+149997      (5000.0, 10000.0]
+149998      (5000.0, 10000.0]
+149999      (5000.0, 10000.0]
+Name: 月收入, Length: 150000, dtype: category
+Categories (5, interval[int64]): [(0, 5000] &lt; (5000, 10000] &lt; (10000, 15000] &lt; (15000, 20000] &lt; (20000, 100000]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_income_user</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;好壞客戶&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">income_cut</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">bad_income_user</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;好壞客戶&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">income_cut</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">bad_rate</span> <span class="o">=</span> <span class="n">bad_income_user</span><span class="o">/</span><span class="n">all_income_user</span>
+<span class="n">bad_rate</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>月收入
+(0, 5000]          0.087543
+(5000, 10000]      0.058308
+(10000, 15000]     0.041964
+(15000, 20000]     0.041811
+(20000, 100000]    0.053615
+Name: 好壞客戶, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#繪製月收入與壞帳率關係圖</span>
+<span class="n">bad_rate</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x194d5ca38d0&gt;
+</pre></div>
+</div>
+<img alt="_images/Ch14_27_1.png" src="_images/Ch14_27_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">age_cut</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;年齡&quot;</span><span class="p">],</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">all_age_user</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;好壞客戶&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">age_cut</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">bad_age_user</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;好壞客戶&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">age_cut</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">bad_rate</span> <span class="o">=</span> <span class="n">bad_age_user</span><span class="o">/</span><span class="n">all_age_user</span>
+<span class="n">bad_rate</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>年齡
+(-0.001, 37.0]    0.108201
+(37.0, 45.0]      0.086841
+(45.0, 52.0]      0.078956
+(52.0, 59.0]      0.059600
+(59.0, 67.0]      0.039205
+(67.0, 109.0]     0.022498
+Name: 好壞客戶, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#繪製年齡與壞帳率關係圖</span>
+<span class="n">bad_rate</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x194d70a0fd0&gt;
+</pre></div>
+</div>
+<img alt="_images/Ch14_29_1.png" src="_images/Ch14_29_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_age_user</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;眷屬數量&quot;</span><span class="p">)[</span><span class="s2">&quot;好壞客戶&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">bad_age_user</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;眷屬數量&quot;</span><span class="p">)[</span><span class="s2">&quot;好壞客戶&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">bad_rate</span> <span class="o">=</span> <span class="n">bad_age_user</span><span class="o">/</span><span class="n">all_age_user</span>
+<span class="n">bad_rate</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>眷屬數量
+0.0     0.058629
+1.0     0.073529
+2.0     0.081139
+3.0     0.088263
+4.0     0.103774
+5.0     0.091153
+6.0     0.151899
+7.0     0.098039
+8.0     0.083333
+9.0     0.000000
+10.0    0.000000
+13.0    0.000000
+20.0    0.000000
+Name: 好壞客戶, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#繪製眷屬數量與壞帳率關係圖</span>
+<span class="n">bad_rate</span><span class="o">.</span> <span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x194d710e390&gt;
+</pre></div>
+</div>
+<img alt="_images/Ch14_31_1.png" src="_images/Ch14_31_1.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="Ch13.html" title="previous page">Ch13 數據視覺化</a>
+    <a class='right-next' id="next-link" href="Ch15.html" title="next page">Ch15 NumPy陣列</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book Community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

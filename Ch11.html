@@ -1,0 +1,3328 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ch11 多表拼接 &#8212; My sample book</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ch12 結果匯出" href="Ch12.html" />
+    <link rel="prev" title="Ch10 資料分組/樞紐分析表" href="Ch10.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">My sample book</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch3.html">
+   Ch03 Pandas資料結構
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch4.html">
+   Ch04 取得資料來源
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch5.html">
+   Ch05 數據預處理
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch6.html">
+   Ch06資料選擇
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch7.html">
+   Ch07 數值操作
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch8.html">
+   Ch08 資料運算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch9.html">
+   Ch09 時間序列
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch10.html">
+   Ch10 資料分組/樞紐分析表
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Ch11 多表拼接
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch12.html">
+   Ch12 結果匯出
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch13.html">
+   Ch13 數據視覺化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch13.html#reference">
+   Reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch14.html">
+   Ch14 典型資料分析案例
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch15.html">
+   Ch15 NumPy陣列
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Ch11.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FCh11.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Ch11.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   表的橫向拼接
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     連接表的類型
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     連接鍵的類型
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     連接方式
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     重複欄名處理
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   表的縱向拼接
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     普通合併
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     索引設定
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     重疊資料合併
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="ch11">
+<h1>Ch11 多表拼接<a class="headerlink" href="#ch11" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>表的橫向拼接<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>連接表的類型<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">data1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;名次&quot;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+         <span class="s2">&quot;姓名&quot;</span><span class="p">:[</span><span class="s2">&quot;小張&quot;</span><span class="p">,</span><span class="s2">&quot;小王&quot;</span><span class="p">,</span><span class="s2">&quot;小李&quot;</span><span class="p">,</span><span class="s2">&quot;小趙&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;103&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;成績&quot;</span><span class="p">:[</span><span class="mi">650</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">578</span><span class="p">,</span><span class="mi">550</span><span class="p">]}</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data1</span><span class="p">)</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;103&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;班級&quot;</span><span class="p">:[</span><span class="s2">&quot;一班&quot;</span><span class="p">,</span><span class="s2">&quot;一班&quot;</span><span class="p">,</span><span class="s2">&quot;二班&quot;</span><span class="p">,</span><span class="s2">&quot;二班&quot;</span><span class="p">]}</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>學號</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>100</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>101</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>102</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>103</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>成績</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;姓名&quot;</span><span class="p">:[</span><span class="s2">&quot;小張&quot;</span><span class="p">,</span><span class="s2">&quot;小王&quot;</span><span class="p">,</span><span class="s2">&quot;小李&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;f_成績&quot;</span><span class="p">:[</span><span class="mi">650</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">578</span><span class="p">]}</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data1</span><span class="p">)</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>f_成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s1">&#39;100&#39;</span><span class="p">,</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;e_成績&quot;</span><span class="p">:[</span><span class="mi">586</span><span class="p">,</span><span class="mi">602</span><span class="p">,</span><span class="mi">691</span><span class="p">,</span><span class="mi">702</span><span class="p">,</span><span class="mi">645</span><span class="p">,</span><span class="mi">676</span><span class="p">]}</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>學號</th>
+      <th>e_成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>586</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100</td>
+      <td>602</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>101</td>
+      <td>691</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>102</td>
+      <td>702</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>101</td>
+      <td>645</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>102</td>
+      <td>676</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;學號&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>f_成績</th>
+      <th>e_成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>586</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>602</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>691</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>645</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>702</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>676</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;姓名&quot;</span><span class="p">:[</span><span class="s2">&quot;小張&quot;</span><span class="p">,</span><span class="s2">&quot;小張&quot;</span><span class="p">,</span><span class="s2">&quot;小王&quot;</span><span class="p">,</span><span class="s2">&quot;小李&quot;</span><span class="p">,</span><span class="s2">&quot;小李&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;f_成績&quot;</span><span class="p">:[</span><span class="mi">650</span><span class="p">,</span><span class="mi">610</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">578</span><span class="p">,</span><span class="mi">542</span><span class="p">]}</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data1</span><span class="p">)</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>f_成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>610</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>542</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s1">&#39;100&#39;</span><span class="p">,</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;e_成績&quot;</span><span class="p">:[</span><span class="mi">650</span><span class="p">,</span><span class="mi">610</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">578</span><span class="p">,</span><span class="mi">542</span><span class="p">]}</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>學號</th>
+      <th>e_成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100</td>
+      <td>610</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>101</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>102</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>102</td>
+      <td>542</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>f_成績</th>
+      <th>e_成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>610</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>610</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>610</td>
+      <td>610</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>542</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>542</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>542</td>
+      <td>542</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>連接鍵的類型<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;名次&quot;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+         <span class="s2">&quot;姓名&quot;</span><span class="p">:[</span><span class="s2">&quot;小張&quot;</span><span class="p">,</span><span class="s2">&quot;小王&quot;</span><span class="p">,</span><span class="s2">&quot;小李&quot;</span><span class="p">,</span><span class="s2">&quot;小趙&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;103&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;成績&quot;</span><span class="p">:[</span><span class="mi">650</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">578</span><span class="p">,</span><span class="mi">550</span><span class="p">]}</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data1</span><span class="p">)</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;103&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;班級&quot;</span><span class="p">:[</span><span class="s2">&quot;一班&quot;</span><span class="p">,</span><span class="s2">&quot;一班&quot;</span><span class="p">,</span><span class="s2">&quot;二班&quot;</span><span class="p">,</span><span class="s2">&quot;三班&quot;</span><span class="p">]}</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>學號</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>101</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>102</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>103</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>成績</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;學號&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>成績</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;姓名&quot;</span><span class="p">:[</span><span class="s2">&quot;小張&quot;</span><span class="p">,</span><span class="s2">&quot;小王&quot;</span><span class="p">,</span><span class="s2">&quot;小李&quot;</span><span class="p">,</span><span class="s2">&quot;小趙&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;103&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;班級&quot;</span><span class="p">:[</span><span class="s2">&quot;一班&quot;</span><span class="p">,</span><span class="s2">&quot;一班&quot;</span><span class="p">,</span><span class="s2">&quot;二班&quot;</span><span class="p">,</span><span class="s2">&quot;三班&quot;</span><span class="p">]}</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>小王</td>
+      <td>101</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>小趙</td>
+      <td>103</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">on</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;姓名&quot;</span><span class="p">,</span><span class="s2">&quot;學號&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>成績</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;名次&quot;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+         <span class="s2">&quot;姓名&quot;</span><span class="p">:[</span><span class="s2">&quot;小張&quot;</span><span class="p">,</span><span class="s2">&quot;小王&quot;</span><span class="p">,</span><span class="s2">&quot;小李&quot;</span><span class="p">,</span><span class="s2">&quot;小趙&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;編號&quot;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;103&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;成績&quot;</span><span class="p">:[</span><span class="mi">650</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">578</span><span class="p">,</span><span class="mi">550</span><span class="p">]}</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data1</span><span class="p">)</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>編號</th>
+      <th>成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;103&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;班級&quot;</span><span class="p">:[</span><span class="s2">&quot;一班&quot;</span><span class="p">,</span><span class="s2">&quot;一班&quot;</span><span class="p">,</span><span class="s2">&quot;二班&quot;</span><span class="p">,</span><span class="s2">&quot;三班&quot;</span><span class="p">]}</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>學號</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>101</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>102</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>103</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">left_on</span> <span class="o">=</span> <span class="s2">&quot;編號&quot;</span><span class="p">,</span><span class="n">right_on</span> <span class="o">=</span> <span class="s2">&quot;學號&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>編號</th>
+      <th>成績</th>
+      <th>學號</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>100</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>101</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>102</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+      <td>103</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/test11.xlsx&quot;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>成績</th>
+    </tr>
+    <tr>
+      <th>編號</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100</td>
+      <td>1</td>
+      <td>小張</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>2</td>
+      <td>小王</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>3</td>
+      <td>小李</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>4</td>
+      <td>小趙</td>
+      <td>550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/test11.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;df2&quot;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>班級</th>
+    </tr>
+    <tr>
+      <th>學號</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">left_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">right_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>成績</th>
+      <th>班級</th>
+    </tr>
+    <tr>
+      <th>編號</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100</td>
+      <td>1</td>
+      <td>小張</td>
+      <td>650</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>2</td>
+      <td>小王</td>
+      <td>600</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>3</td>
+      <td>小李</td>
+      <td>578</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>4</td>
+      <td>小趙</td>
+      <td>550</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>成績</th>
+    </tr>
+    <tr>
+      <th>編號</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100</td>
+      <td>1</td>
+      <td>小張</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>2</td>
+      <td>小王</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>3</td>
+      <td>小李</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>4</td>
+      <td>小趙</td>
+      <td>550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/test11.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;df2&quot;</span><span class="p">)</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>學號</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>100</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>101</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>102</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>103</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">left_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">right_on</span> <span class="o">=</span> <span class="s2">&quot;學號&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>成績</th>
+      <th>學號</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>小張</td>
+      <td>650</td>
+      <td>100</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>小王</td>
+      <td>600</td>
+      <td>101</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>3</td>
+      <td>小李</td>
+      <td>578</td>
+      <td>102</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>4</td>
+      <td>小趙</td>
+      <td>550</td>
+      <td>103</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>連接方式<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;名次&quot;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+         <span class="s2">&quot;姓名&quot;</span><span class="p">:[</span><span class="s2">&quot;小張&quot;</span><span class="p">,</span><span class="s2">&quot;小王&quot;</span><span class="p">,</span><span class="s2">&quot;小李&quot;</span><span class="p">,</span><span class="s2">&quot;小趙&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;103&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;成績&quot;</span><span class="p">:[</span><span class="mi">650</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">578</span><span class="p">,</span><span class="mi">550</span><span class="p">]}</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data1</span><span class="p">)</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;姓名&quot;</span><span class="p">:[</span><span class="s2">&quot;小張&quot;</span><span class="p">,</span><span class="s2">&quot;小王&quot;</span><span class="p">,</span><span class="s2">&quot;小李&quot;</span><span class="p">,</span><span class="s2">&quot;小錢&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;學號&quot;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span><span class="s2">&quot;101&quot;</span><span class="p">,</span><span class="s2">&quot;102&quot;</span><span class="p">,</span><span class="s2">&quot;104&quot;</span><span class="p">],</span>
+         <span class="s2">&quot;班級&quot;</span><span class="p">:[</span><span class="s2">&quot;一班&quot;</span><span class="p">,</span><span class="s2">&quot;一班&quot;</span><span class="p">,</span><span class="s2">&quot;二班&quot;</span><span class="p">,</span><span class="s2">&quot;三班&quot;</span><span class="p">]}</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>小王</td>
+      <td>101</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>小錢</td>
+      <td>104</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;學號&quot;</span><span class="p">,</span><span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名_x</th>
+      <th>學號</th>
+      <th>成績</th>
+      <th>姓名_y</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>小張</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>小王</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>小李</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;學號&quot;</span><span class="p">,</span><span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名_x</th>
+      <th>學號</th>
+      <th>成績</th>
+      <th>姓名_y</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>小張</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>小王</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>小李</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;學號&quot;</span><span class="p">,</span><span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名_x</th>
+      <th>學號</th>
+      <th>成績</th>
+      <th>姓名_y</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650.0</td>
+      <td>小張</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.0</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600.0</td>
+      <td>小王</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.0</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578.0</td>
+      <td>小李</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>104</td>
+      <td>NaN</td>
+      <td>小錢</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;學號&quot;</span><span class="p">,</span><span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;outer&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名_x</th>
+      <th>學號</th>
+      <th>成績</th>
+      <th>姓名_y</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650.0</td>
+      <td>小張</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.0</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600.0</td>
+      <td>小王</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.0</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578.0</td>
+      <td>小李</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.0</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>104</td>
+      <td>NaN</td>
+      <td>小錢</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>重複欄名處理<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>成績</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>小趙</td>
+      <td>103</td>
+      <td>550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>學號</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>小張</td>
+      <td>100</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>小王</td>
+      <td>101</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>小李</td>
+      <td>102</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>小錢</td>
+      <td>104</td>
+      <td>三班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;學號&quot;</span><span class="p">,</span><span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名_x</th>
+      <th>學號</th>
+      <th>成績</th>
+      <th>姓名_y</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>小張</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>小王</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>小李</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#為重複的欄名加尾碼_L和_R</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">,</span><span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;學號&quot;</span><span class="p">,</span><span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span><span class="p">,</span><span class="n">suffixes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;_L&quot;</span><span class="p">,</span><span class="s2">&quot;_R&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>名次</th>
+      <th>姓名_L</th>
+      <th>學號</th>
+      <th>成績</th>
+      <th>姓名_R</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>小張</td>
+      <td>100</td>
+      <td>650</td>
+      <td>小張</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>小王</td>
+      <td>101</td>
+      <td>600</td>
+      <td>小王</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>小李</td>
+      <td>102</td>
+      <td>578</td>
+      <td>小李</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>表的縱向拼接<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h3>普通合併<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/test11.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;11-2a&quot;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>班級</th>
+    </tr>
+    <tr>
+      <th>編號</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>許苑馳</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>李辛立</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>陳麗仕</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>趙德柱</td>
+      <td>一班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/test11.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;11-2b&quot;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>班級</th>
+    </tr>
+    <tr>
+      <th>編號</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>趙朴道</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>李世民</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>衛何汶</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>葛辟</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>班級</th>
+    </tr>
+    <tr>
+      <th>編號</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>許苑馳</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>李辛立</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>陳麗仕</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>趙德柱</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>趙朴道</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>李世民</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>衛何汶</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>葛辟</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>索引設定<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">],</span><span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>許苑馳</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>李辛立</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>陳麗仕</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>趙德柱</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>趙朴道</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>李世民</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>衛何汶</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>葛辟</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>重疊資料合併<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/test11.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;11-2-3&quot;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>班級</th>
+    </tr>
+    <tr>
+      <th>編號</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>許苑馳</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>李辛立</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>陳麗仕</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>趙德柱</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>葛辟</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>班級</th>
+    </tr>
+    <tr>
+      <th>編號</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>趙朴道</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>李世民</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>衛何汶</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>葛辟</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">],</span><span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>許苑馳</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>李辛立</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>陳麗仕</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>趙德柱</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>葛辟</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>趙朴道</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>李世民</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>衛何汶</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>葛辟</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span><span class="n">df2</span><span class="p">],</span><span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>姓名</th>
+      <th>班級</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>許苑馳</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>李辛立</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>陳麗仕</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>趙德柱</td>
+      <td>一班</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>葛辟</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>趙朴道</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>李世民</td>
+      <td>二班</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>衛何汶</td>
+      <td>二班</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done!
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="Ch10.html" title="previous page">Ch10 資料分組/樞紐分析表</a>
+    <a class='right-next' id="next-link" href="Ch12.html" title="next page">Ch12 結果匯出</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book Community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
