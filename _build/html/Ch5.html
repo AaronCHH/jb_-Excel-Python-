@@ -1,0 +1,3023 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ch05 數據預處理 &#8212; My sample book</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ch06資料選擇" href="Ch6.html" />
+    <link rel="prev" title="Ch04 取得資料來源" href="Ch4.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">My sample book</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch3.html">
+   Ch03 Pandas資料結構
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch4.html">
+   Ch04 取得資料來源
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Ch05 數據預處理
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch6.html">
+   Ch06資料選擇
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch7.html">
+   Ch07 數值操作
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch8.html">
+   Ch08 資料運算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch9.html">
+   Ch09 時間序列
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch10.html">
+   Ch10 資料分組/樞紐分析表
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch11.html">
+   Ch11 多表拼接
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch12.html">
+   Ch12 結果匯出
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch13.html">
+   Ch13 數據視覺化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch13.html#reference">
+   Reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch14.html">
+   Ch14 典型資料分析案例
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch15.html">
+   Ch15 NumPy陣列
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Ch5.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FCh5.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Ch5.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   缺失值處理
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     缺失值查看
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     缺失值刪除
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     缺失值填補
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   重複值處理
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   異常值的檢測與處理
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   資料類型轉換
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     資料類型
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     類型轉換
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   索引設定
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     為無索引表添加索引
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     重新設定索引
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     重新命名索引
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     重置索引(未完成，待確認)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="ch05">
+<h1>Ch05 數據預處理<a class="headerlink" href="#ch05" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>缺失值處理<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>缺失值查看<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\ACD019600\data\test5.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;5-1-1&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>編號</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>註冊時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>54</td>
+      <td>男</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>16</td>
+      <td>NaN</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>47</td>
+      <td>女</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A4</td>
+      <td>41</td>
+      <td>男</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 4 entries, 0 to 3
+Data columns (total 4 columns):
+編號      4 non-null object
+年齡      4 non-null int64
+性別      3 non-null object
+註冊時間    4 non-null datetime64[ns]
+dtypes: datetime64[ns](1), int64(1), object(2)
+memory usage: 208.0+ bytes
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>編號</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>註冊時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>缺失值刪除<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\ACD019600\data\test5.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;5-1-2&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>編號</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>註冊時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>54.0</td>
+      <td>男</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>16.0</td>
+      <td>NaN</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A4</td>
+      <td>41.0</td>
+      <td>男</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>編號</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>註冊時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>54</td>
+      <td>男</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>47</td>
+      <td>女</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A4</td>
+      <td>41</td>
+      <td>男</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>編號</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>註冊時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>54.0</td>
+      <td>男</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>16.0</td>
+      <td>NaN</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaT</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A4</td>
+      <td>41.0</td>
+      <td>男</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>編號</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>註冊時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>54.0</td>
+      <td>男</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>16.0</td>
+      <td>NaN</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A4</td>
+      <td>41.0</td>
+      <td>男</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>缺失值填補<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\ACD019600\data\test5.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;5-1-3&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>編號</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>註冊時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>54.0</td>
+      <td>男</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>16.0</td>
+      <td>NaN</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>NaN</td>
+      <td>女</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A4</td>
+      <td>41.0</td>
+      <td>男</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>編號</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>註冊時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>54.0</td>
+      <td>男</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>16.0</td>
+      <td>0</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>0.0</td>
+      <td>女</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A4</td>
+      <td>41.0</td>
+      <td>男</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>編號</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>註冊時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>54.0</td>
+      <td>男</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>16.0</td>
+      <td>NaN</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>NaN</td>
+      <td>女</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A4</td>
+      <td>41.0</td>
+      <td>男</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">({</span><span class="s2">&quot;性別&quot;</span><span class="p">:</span><span class="s2">&quot;男&quot;</span><span class="p">})</span><span class="c1">#對性別進行填補</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>編號</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>註冊時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>54.0</td>
+      <td>男</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>16.0</td>
+      <td>男</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>NaN</td>
+      <td>女</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A4</td>
+      <td>41.0</td>
+      <td>男</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#分別對性別和年齡進行填充</span>
+<span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">({</span><span class="s2">&quot;性別&quot;</span><span class="p">:</span><span class="s2">&quot;男&quot;</span><span class="p">,</span><span class="s2">&quot;年齡&quot;</span><span class="p">:</span><span class="s2">&quot;30&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>編號</th>
+      <th>年齡</th>
+      <th>性別</th>
+      <th>註冊時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>54</td>
+      <td>男</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>16</td>
+      <td>男</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>30</td>
+      <td>女</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A4</td>
+      <td>41</td>
+      <td>男</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>重複值處理<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\ACD019600\data\test5.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;5-2&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span> <span class="o">=</span> <span class="s2">&quot;唯一識別碼&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;客戶姓名&quot;</span><span class="p">,</span><span class="s2">&quot;唯一識別碼&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#保留最後一個重複值</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;客戶姓名&quot;</span><span class="p">,</span><span class="s2">&quot;唯一識別碼&quot;</span><span class="p">],</span> <span class="n">keep</span> <span class="o">=</span> <span class="s2">&quot;last&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#不保留任何重複值</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;客戶姓名&quot;</span><span class="p">,</span><span class="s2">&quot;唯一識別碼&quot;</span><span class="p">],</span> <span class="n">keep</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>異常值的檢測與處理<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>（本節無範例)</p>
+</div>
+<div class="section" id="id7">
+<h2>資料類型轉換<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3>資料類型<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\ACD019600\data\test5.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;5-4&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;訂單編號&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="c1">#查看訂單編號這一欄的資料類型</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dtype(&#39;O&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;唯一識別碼&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="c1">#查看唯一識別碼這一欄的資料類型</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dtype(&#39;int64&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>類型轉換<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;唯一識別碼&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="c1">#查看唯一識別碼這一列的資料類型</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dtype(&#39;int64&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;唯一識別碼&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">)</span> <span class="c1">#將唯一識別碼從int類型轉換為float類型</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    101.0
+1    102.0
+2    103.0
+3    103.0
+4    104.0
+5    104.0
+Name: 唯一識別碼, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>索引設定<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h3>為無索引表添加索引<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/test5.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;5-5&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A1</th>
+      <th>張通</th>
+      <th>101</th>
+      <th>2018-08-08 00:00:00</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;bound method DataFrame.info of    A1  張通  101 2018-08-08 00:00:00
+0  A2  李谷  102          2018-08-09
+1  A3  孫鳳  103          2018-08-10
+2  A3  孫鳳  103          2018-08-10
+3  A4  趙桓  104          2018-08-11
+4  A5  趙桓  104          2018-08-12&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>101</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>count</td>
+      <td>5.00000</td>
+    </tr>
+    <tr>
+      <td>mean</td>
+      <td>103.20000</td>
+    </tr>
+    <tr>
+      <td>std</td>
+      <td>0.83666</td>
+    </tr>
+    <tr>
+      <td>min</td>
+      <td>102.00000</td>
+    </tr>
+    <tr>
+      <td>25%</td>
+      <td>103.00000</td>
+    </tr>
+    <tr>
+      <td>50%</td>
+      <td>103.00000</td>
+    </tr>
+    <tr>
+      <td>75%</td>
+      <td>104.00000</td>
+    </tr>
+    <tr>
+      <td>max</td>
+      <td>104.00000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A1</th>
+      <th>張通</th>
+      <th>101</th>
+      <th>2018-08-08 00:00:00</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 為表添加欄索引</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;訂單編號&quot;</span><span class="p">,</span><span class="s2">&quot;客戶姓名&quot;</span><span class="p">,</span><span class="s2">&quot;唯一識別碼&quot;</span><span class="p">,</span><span class="s2">&quot;成交時間&quot;</span><span class="p">]</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#為表添加列索引</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="id12">
+<h3>重新設定索引<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;訂單編號&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+    <tr>
+      <th>訂單編號</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="id13">
+<h3>重新命名索引<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/test5.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;5-4&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#重新命名欄索引</span>
+<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;訂單編號&quot;</span><span class="p">:</span><span class="s2">&quot;新訂單編號&quot;</span><span class="p">,</span> <span class="s2">&quot;客戶姓名&quot;</span><span class="p">:</span><span class="s2">&quot;新客戶姓名&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>新訂單編號</th>
+      <th>新客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#重新命名列索引</span>
+<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s2">&quot;一&quot;</span><span class="p">,</span>
+                   <span class="mi">2</span><span class="p">:</span><span class="s2">&quot;二&quot;</span><span class="p">,</span>
+                   <span class="mi">3</span><span class="p">:</span><span class="s2">&quot;三&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>一</td>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <td>二</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>三</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#同時重新命名列索引和欄索引</span>
+<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;訂單編號&quot;</span><span class="p">:</span><span class="s2">&quot;新訂單編號&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;客戶姓名&quot;</span><span class="p">:</span><span class="s2">&quot;新客戶姓名&quot;</span><span class="p">},</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s2">&quot;一&quot;</span><span class="p">,</span>
+                     <span class="mi">2</span><span class="p">:</span><span class="s2">&quot;二&quot;</span><span class="p">,</span>
+                     <span class="mi">3</span><span class="p">:</span><span class="s2">&quot;三&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>新訂單編號</th>
+      <th>新客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>一</td>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <td>二</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>三</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="id14">
+<h3>重置索引(未完成，待確認)<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df = pd.DataFrame([[1,2],[3,4],[5,6],[7,8]],</span>
+<span class="c1">#                   columns = [&quot;C1&quot;,&quot;C2&quot;],</span>
+<span class="c1">#                   index = [&quot;Z1&quot;,&quot;Z2&quot;,&quot;Z3&quot;,&quot;Z4&quot;])</span>
+<span class="c1"># df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>3</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>4</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>5</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>6</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>訂單編號</th>
+      <th>客戶姓名</th>
+      <th>唯一識別碼</th>
+      <th>成交時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>A1</td>
+      <td>張通</td>
+      <td>101</td>
+      <td>2018-08-08</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>A2</td>
+      <td>李谷</td>
+      <td>102</td>
+      <td>2018-08-09</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>A3</td>
+      <td>孫鳳</td>
+      <td>103</td>
+      <td>2018-08-10</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>A4</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-11</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>A5</td>
+      <td>趙桓</td>
+      <td>104</td>
+      <td>2018-08-12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/test5.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;5-5-4&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Unnamed: 1</th>
+      <th>C1</th>
+      <th>C2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Z1</td>
+      <td>Z2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>A</td>
+      <td>a</td>
+      <td>1.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>NaN</td>
+      <td>b</td>
+      <td>3.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>B</td>
+      <td>a</td>
+      <td>5.0</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>NaN</td>
+      <td>b</td>
+      <td>7.0</td>
+      <td>8.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="Ch4.html" title="previous page">Ch04 取得資料來源</a>
+    <a class='right-next' id="next-link" href="Ch6.html" title="next page">Ch06資料選擇</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book Community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
